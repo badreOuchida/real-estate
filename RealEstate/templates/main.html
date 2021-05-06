@@ -1,0 +1,83 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home founder</title>
+    <!--links-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3acc62aaef.js" crossorigin="anonymous"></script>
+    <!--main style link-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/p.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/blogs.css' %}">
+</head>
+<body>
+    <!--the navbar-->
+    <!--the header-->
+    {% block content  %}
+
+    {% endblock content %}
+    <!--footer-->
+    <footer id="footer">
+        <div class="container-fluid" id='con'>
+            <i class="fab fa-facebook fa-2x"></i>
+            <i class="fab fa-instagram fa-2x"></i>
+            <i class="fab fa-whatsapp fa-2x"></i>
+            <i class="fab fa-twitter fa-2x"></i>
+            <i class="fab fa-pinterest-p fa-2x"></i>
+        </div>
+        <div class="container">
+            <div class="top_footer text-center mb-5">
+                <img src="{%static 'images/logo.png'%}"alt="">
+                <p>Here you will find you home dream</p>
+                <div class="media_icon">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Poperties</a></li>
+                        <li><a href="#">Blogs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul>
+                        <li><a href="#">Our services</a></li>
+                        <li><a href="#">for rent</a></li>
+                        <li><a href="#">for sell</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-5">
+                    <ul>
+                        <li><a href="#">lastest properties</a></li>
+                        <li><a href="#">privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h6>E-mail</h6>
+                    <p>somthing@gmail.com</p>
+                    <h6>Adress</h6>
+                    <p>3015 Grand Ave, Coconut Grove, Merrick Way, FL 12345 </p>
+                </div>
+            </div>
+            <p class="copy_right">
+                copyright2020  All right reserved
+            </p>
+        </div>
+    </footer>
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    {% block script%}
+    {%endblock%}
+</body>
+</html>

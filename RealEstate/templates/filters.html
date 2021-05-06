@@ -1,0 +1,46 @@
+{% load static %}
+
+
+				
+
+
+
+
+ 				<form action="{% url 'app:properties' %}" method="post" class="search_box">
+                    <div class="search_icon"><img src="{%static 'images/search_icon.svg'%}" alt=""></div>
+                    <div class="selects_container">
+                        {%csrf_token%}
+                        <div class="prop">
+                            <label for="id_location">Location:</label> 
+                            <input type="text" name="location" id="id_location" class="form-control"
+                                placeholder="Location">
+                        </div>
+
+                        <div class="prop">
+                            <label for="id_prop_type">Property type:</label> 
+                            <input type="text" name="prop_type" id="id_prop_type" class="form-control"
+                                placeholder="Property type">
+                        </div>
+
+                        <div class="prop">
+                            <label for="id_air">Air:</label> 
+                            <input type="text" name="air" id="id_air" class="form-control" placeholder="Air">
+                        </div>
+                        <div class="prop">
+                            <label for="id_status">Status:</label> 
+                            <select name="status" id="id_status" class="form-control">
+                                <option value="" selected>Status</option>
+
+                                <option value="sell">sell</option>
+
+                                <option value="rent">rent</option>
+
+                            </select>
+                        </div>
+                        <div class="prop">
+                            <label for="id_price">Price:</label> 
+                            <input type="number" name="price" step="any" id="id_price" class="form-control"     placeholder="Price">
+                        </div>
+                        <input class="search_btn" type="submit" value="search" />
+                    </div>
+                </form>

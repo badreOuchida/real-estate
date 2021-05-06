@@ -1,0 +1,160 @@
+{% extends 'main.html' %}
+{%load static%}
+{% block content %}
+
+    <nav id="navbar">
+        <div class="container nav_container">
+            <div class="logo">
+                <img class="img-fluid" src="{% static 'images/logo.png' %}" >
+            </div>
+            <ul class="nav_links">
+                <i id="close_nav" class="fas fa-times"></i>
+                <li><a href="{%url 'app:home'%}">Home</a></li>
+                <li class="active"><a href="{% url 'app:properties'%}">Properties</a></li>
+                <li><a href="{% url 'app:blogs'%}">Blogs</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="{% url 'app:contact'%}">Contact</a></li>
+            </ul>
+            <div class="phone_number">
+                <i class="fas fa-phone-alt"></i>
+                <span>+212-414-87-787</span>
+            </div>
+            <img id="nav_open" src="{% static 'images/menu_open.png' %}" alt="">
+        </div>
+    </nav>
+
+<section id="hero_section">
+        <div class="container">
+            <div class="content">
+                <h1>All Properties</h1>
+                {%  include 'filters.html' %}
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="properties_contanier">
+        <div class="container">
+            <div class="row">
+                <!--left colomn-->
+                <div class="col-md-8">
+                    <div class="row">
+            
+                        {% for prop in page_obj %}
+
+                            <div class="col-lg-6 mb-5">
+                                <!--property box-->
+                                <a href="{% url 'app:propertie' prop.id %}">
+
+                                    <div class="property_box">
+                                    <img src="{{prop.principale_image.url}}" alt="" class="img-fluid">
+                                    <h5 class="prop_title"><a href="{% url 'app:propertie' prop.id %}">{{prop.title}}</a></h5>
+                                    <span class="prop_type">for {{prop.status}}</span>
+                                    <p class="prop_desciption">
+                                        {{prop.mini_des}}
+                                        <a href="{% url 'app:propertie' prop.id %}" class="learn-more">learn more</a>
+                                    </p>
+                                    <ul class="prop_info">
+                                        <li><i class="fas fa-map-marker-alt"></i>{{prop.location}}</li>
+                                        <li><i class="fas fa-door-closed"></i>{{prop.living_rooms}}/ {{prop.beds_rooms}}/ {{prop.bath_rooms}}</li>
+                                        <li><i class="fas fa-vector-square"></i>{{prop.air}}</li>
+                                    </ul>
+                                    <h3 class="prop_price">${{prop.price}}</h3>
+                                </div>
+                                    
+                                </a>
+                            </div>
+                        
+                        {%endfor%}
+                    </div>
+
+                    {% if is_paginated %}
+                   
+                      <nav class="d-flex justify-content-center wow fadeIn">
+                        <ul class="pagination pg-blue">
+
+                          {% if page_obj.has_previous %}
+                          <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          </li>
+                          {% endif %}
+
+                          <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+                              <span class="sr-only">(current)</span>
+                            </a>
+                          </li>
+
+                          {% if page_obj.has_next %}
+                          <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </li>
+                          {% endif %}
+                        </ul>
+                      </nav>
+                    {% endif%}
+
+                </div>
+                <!--right colomn-->
+                <div class="col-md-4 right_aside">
+                    <div class="main_heading text-left">
+                        <h4><p>Advanced search</p></h4>
+                    </div>
+                    <form action="" class="advanced_search mb-5">
+                        <select class="form-control">
+                            <option>Default order</option>
+                        </select>
+                        <input type="text" placeholder="Keyword">
+                        <select class="form-control">
+                            <option>Area (sq ft)</option>
+                        </select>
+                        <select class="form-control">
+                            <option>Agent</option>
+                        </select>
+                    </form>
+                    <div class="main_heading text-left">
+                        <h4><p>Featured properties</p></h4>
+                    </div>
+                    <a href="% url 'app:propertie' object.id %}"> 
+
+                        <div class="property_box" style="margin-bottom:2rem;">
+                            <span class="featured">featured</span>
+                            <img src="{% static 'images/prop1.jpg'%}" alt="" class="img-fluid">
+                            <h5 class="prop_title"><a href="% url 'app:propertie' prop.id %}">{{object.title}}</a></h5>
+                            <span class="prop_type">for {{object.status}}</span>
+                            <p class="prop_desciption">{{object.mini_des}}
+                                <a href="{% url 'app:propertie' object.id %}" class="learn-more">learn more</a>
+                            </p>
+                            <ul class="prop_info">
+                                <li><i class="fas fa-map-marker-alt"></i>{{obejct.location}}</li>
+                                <li><i class="fas fa-door-closed"></i>{{object.living_rooms}}/ {{object.beds_rooms}}/ {{object.bath_rooms}}</li>
+                                <li><i class="fas fa-vector-square"></i>{{object.air}}</li>
+                            </ul>
+                            
+                            <h3 class="prop_price">${{object.price}}</h3>
+                        </div>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{%endblock%}
+
+
+{% block script%}
+
+    <script type="text/javascript">
+        document.querySelectorAll('li').forEach((li)=>{
+            console.log(li)
+        })
+    </script>
+
+{% endblock%}

@@ -1,0 +1,211 @@
+{% extends 'main.html' %}
+{%load static%}
+
+{% block content %}
+
+ <nav id="navbar">
+        <div class="container nav_container">
+            <div class="logo">
+                <img class="img-fluid" src="{% static 'images/logo.png' %}" >
+            </div>
+            <ul class="nav_links">
+                <i id="close_nav" class="fas fa-times"></i>
+                <li class="active"><a href="{%url 'app:home'%}">Home</a></li>
+                <li><a href="{% url 'app:properties'%}">Properties</a></li>
+                <li><a href="{% url 'app:blogs'%}">Blogs</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="{% url 'app:contact'%}">Contact</a></li>
+            </ul>
+            <div class="phone_number">
+                <i class="fas fa-phone-alt"></i>
+                <span>+212-414-87-787</span>
+            </div>
+            <img id="nav_open" src="{% static 'images/menu_open.png' %}" alt="">
+        </div>
+    </nav>
+
+ <header id="header">
+        <div class="container">
+            <div class="content">
+                <h1>The Most Relaxing Vacation <span>Places</span></h1>
+                <p>A vacation is having nothing to do and all day to do it in.</p>
+
+                {%  include 'filters.html' %}
+            </div>
+        </div>
+    </header>
+
+    <!--Latest Rentals -->
+    <section id="properties">
+        <div class="container">
+            <div class="main_heading">
+                <h3><p>Latest Rentals</p> <span></span></h3>
+                <p class="head_desc">Check out some of our recent properties.  </p>
+            </div>
+            <div class="row mt-5">
+
+                {% for prop in properties%}
+
+                    <div class="col-md-4 mb-5">
+                        <a href="{% url 'app:propertie' prop.id %}">
+                            <div class="property_box">
+                                <img src="{{prop.principale_image.url}}" alt="" class="img-fluid">
+                                <h5 class="prop_title"><a href="{% url 'app:propertie' prop.id %}">{{prop.title}}</a></h5>
+                                <span class="prop_type">for {{prop.status}}</span>
+                                <p class="prop_desciption">{{prop.mini_des}}
+                                  <a href="{% url 'app:propertie' prop.id %}" class="learn-more">learn more</a>
+                                </p>
+                                <ul class="prop_info">
+                                    <li><i class="fas fa-map-marker-alt"></i>{{prop.location}}</li>
+                                    <li><i class="fas fa-door-closed"></i>{{prop.living_rooms}}/ {{prop.beds_rooms}}/ {{prop.bath_rooms}}</li>
+                                    <li><i class="fas fa-vector-square"></i>{{prop.air}}</li>
+                                </ul>
+                                <h3 class="prop_price">${{prop.price}}</h3>
+                            </div>
+                        </a>
+                        
+                    </div>
+                {%endfor%}
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="quoat">
+        <div class="text_container">
+            <p>Find Great Places to Stay <br> at Your Favorite Destinations </p>
+            <a href="#">Browse property</a>
+        </div>
+    </section>
+
+    <!--recent blogs -->
+    <section id="blogs">
+        <div class="container">
+            <div class="main_heading">
+                <h3><p>Recent Blogs</p> <span></span></h3>
+                <p class="head_desc">Check out some of our recent blogs.  </p>
+            </div>
+            <div class="row mt-5">
+                {% for blog in blogs %}
+                    <div class="col-md-4 mb-5">
+                        <!--blog box-->
+                        <div class="blog_box">
+                            <div class="blog_img">
+                                <img src="{{blog.image.url}}" alt="" class="img-fluid">
+                                
+                            </div>
+                            <div class="blog_content">
+                                <h5 class="blog_title"><a href="#">Ut cursus tristique proin libero quam.</a></h5>
+                                <p class="blog_desciption">{{blog.mini_des}}</p>
+                                <a href="#" class="read_more" style="color:#F17A39;">Read more...</a>
+                                <span class="autor">by joe roman</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <div class="more_blog text-center mt-5">
+                <a href="#">Browse all blogs</a>
+            </div>
+        </div>
+    </section>
+
+    <!--blogs-->
+    <section id="services">
+        <div class="container">
+            <div class="main_heading">
+                <h3><p>Services</p> <span></span></h3>
+                <p class="head_desc">Check out some of our recent blogs.  </p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mt-5 mb-5">
+                    <div class="serv_box">
+                        <div class="icon">
+                            <img src="{%static 'images/serv_icon1.png' %}" alt="">
+                        </div>
+                        <div class="serv_desc">
+                            <h5>Advanced searsh</h5>
+                            <p>Tincidunt quam mauris nullam ut tortor nec et sit ornare. Egestas sit consectetur.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-5 mb-5">
+                    <div class="serv_box middle_serv">
+                        <div class="icon">
+                            <img src="{%static 'images/serv_icon1.png' %}" alt="">
+                        </div>
+                        <div class="serv_desc">
+                            <h5>Advanced searsh</h5>
+                            <p>Tincidunt quam mauris nullam ut tortor nec et sit ornare. Egestas sit consectetur.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-5 mb-5">
+                    <div class="serv_box">
+                        <div class="icon">
+                            <img src="{%static 'images/serv_icon1.png' %}" alt="">
+                        </div>
+                        <div class="serv_desc">
+                            <h5>Advanced searsh</h5>
+                            <p>Tincidunt quam mauris nullam ut tortor nec et sit ornare. Egestas sit consectetur.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--testimenials-->
+    <section id="testimenial">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <div class="testm_box">
+                        <p class="testm_p">
+                            Fringilla fusce et neque, egestas amet ultricies lectus viverra nunc. 
+                            Enim amet sed porta tempus vel imperdiet. Fermentum.
+                        </p>
+                        <div class="user">
+                            <img src="{%static 'images/avatar.jpg'%}" alt="">
+                            <div class="info">
+                                <h6>jackson maks</h6>
+                                <span>host</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="testm_box">
+                        <p class="testm_p">
+                            Fringilla fusce et neque, egestas amet ultricies lectus viverra nunc. 
+                            Enim amet sed porta tempus vel imperdiet. Fermentum.
+                        </p>
+                        <div class="user">
+                            <img src="{%static 'images/avatar2.jp'%}g" alt="">
+                            <div class="info">
+                                <h6>Terje Meresankh</h6>
+                                <span>host</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="testm_box">
+                        <p class="testm_p">
+                            Fringilla fusce et neque, egestas amet ultricies lectus viverra nunc. 
+                            Enim amet sed porta tempus vel imperdiet. Fermentum.
+                        </p>
+                        <div class="user">
+                            <img src="{%static 'images/avatar3.jpg' %}" alt="">
+                            <div class="info">
+                                <h6>Rahela Suzan</h6>
+                                <span>host</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

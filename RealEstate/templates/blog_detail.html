@@ -1,0 +1,220 @@
+{% extends 'main.html' %}
+
+{%load static%}
+
+{% block content %}
+
+	 <nav id="navbar">
+        <div class="container nav_container">
+            <div class="logo">
+                <img class="img-fluid" src="{% static 'images/logo.png' %}" >
+            </div>
+            <ul class="nav_links">
+                <i id="close_nav" class="fas fa-times"></i>
+                <li><a href="{%url 'app:home'%}">Home</a></li>
+                <li><a href="{% url 'app:properties'%}">Properties</a></li>
+                <li><a href="{% url 'app:blogs'%}">Blogs</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="{% url 'app:contact'%}">Contact</a></li>
+            </ul>
+            <div class="phone_number">
+                <i class="fas fa-phone-alt"></i>
+                <span>+212-414-87-787</span>
+            </div>
+            <img id="nav_open" src="{% static 'images/menu_open.png' %}" alt="">
+        </div>
+    </nav>
+
+	<section id="hero_section">
+        <div class="container">
+            <div class="content">
+                <h1>All Properties</h1>
+                {% include 'filters.html' %}
+            </div>
+        </div>
+    </section>
+
+    <section id="blog_detail_container">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-8 mb-5">
+                    <div class="blog_detail">
+                        <div class="b_img">
+                            <img src="{% static '/images/blog.jpg' %}" alt="">
+                        </div>
+                        <div class="blog_head">
+                            <h3 class="b_title">{{blog.title}}</h3>
+                            <p class="b_date">{{blog.date_created}}</p>
+                        </div>
+                        <div class="b_content">
+                            {{blog.description}}
+                            </p>
+                            <p></p>
+                        </div>
+                    </div>
+                        <div class="blog_comment mt-5">
+                            <h5 class="heading_p">comments</h5>
+                            <div class="add-comment">
+
+                                {% for comment in Comments %}
+                                    <div class="comment_box">
+                                        <img src="{{comment.image.url}}" alt="">
+                                        <div class="commnt_text">
+                                            <h6 class="commnt_author">{{comment.name}}</h6>
+                                            <p class="commnt_date">{{comment.date_created}}</p>
+                                            <p class="commnt_p">{{comment.comment}}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="comment_box">
+                                    <img src="{% static 'images/avatar2.jpg'%}" alt="">
+                                    <div class="commnt_text">
+                                        <h6 class="commnt_author">locas sir</h6>
+                                        <p class="commnt_date">November 17, 2020 at 2:16 pm</p>
+                                        <p class="commnt_p">Risus duis semper nibh tellus, sed tortor. Augue phasellus vel sit platea.</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <h5 class="heading_p">leave a replay</h5>
+                            <form class="leave_replay">
+                                <div class="input_groupe">
+                                    <div class="custum_input mr-3">
+                                        <label>Name:</label>
+                                        <input type="text" class='details-comment'>
+                                    </div>
+                                    <div class="custum_input">
+                                        <label>email:</label>
+                                        <input type="email" class='details-comment'>
+                                    </div>
+                                </div>
+                                <div class="custum_input">
+                                    <label>message:</label>
+                                    <textarea class='details-comment'></textarea>
+                                </div>
+                                <input class="replay_btn replay-comment" type="submit" value="comment" data-id={{propertie.id}}>
+                            </form>
+                        </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="main_heading text-left mb-5">
+                        <h5><p>Featured properties</p></h5>
+                    </div>
+                    
+                   <a href="% url 'app:propertie' object.id %}"> 
+
+                        <div class="property_box" style="margin-bottom:2rem;">
+                            <span class="featured">featured</span>
+                            <img src="{% static 'images/prop1.jpg'%}" alt="" class="img-fluid">
+                            <h5 class="prop_title"><a href="% url 'app:propertie' prop.id %}">{{object.title}}</a></h5>
+                            <span class="prop_type">for {{object.status}}</span>
+                            <p class="prop_desciption">{{object.mini_des}}
+                                <a href="{% url 'app:propertie' object.id %}" class="learn-more">learn more</a>
+                            </p>
+                            <ul class="prop_info">
+                                <li><i class="fas fa-map-marker-alt"></i>{{obejct.location}}</li>
+                                <li><i class="fas fa-door-closed"></i>{{object.living_rooms}}/ {{object.beds_rooms}}/ {{object.bath_rooms}}</li>
+                                <li><i class="fas fa-vector-square"></i>{{object.air}}</li>
+                            </ul>
+                            
+                            <h3 class="prop_price">${{object.price}}</h3>
+                        </div>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock%}
+
+
+
+{% block script %}
+    <script type="text/javascript">
+
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+
+
+
+
+
+        function BuildComment(id,name,email,comment){
+            url = '../comment/'+id
+            fetch(url, {
+                method:'POST',
+                headers:{
+                    'Content-type':'application/json',
+                    'X-CSRFToken':csrftoken,
+                },
+                body:JSON.stringify({
+                        "id":id,
+                        'name':name,
+                        'email':email,
+                        'comment':comment,
+                        'status':'blog'
+                    })
+            }
+            ).then(function(response){
+                document.querySelector('.leave_replay').reset()
+                var d = new Date();
+                var timeElapsed = Date.now();
+                var today = new Date(timeElapsed);
+                var now = today.toDateString();
+                var content = `
+                            <div class="comment_box">
+                                <img src="../static/images/avatar.jpg" alt="">
+                                <div class="commnt_text">
+                                    <h6 class="commnt_author">${name}</h6>
+                                    <p class="commnt_date">${now} at ${formatAMPM(d)} </p>
+                                    <p class="commnt_p">${comment}</p>
+                                </div>
+                            </div>
+                            `
+                document.querySelector('.add-comment').innerHTML += content;
+            })
+        }
+
+        document.querySelector('.replay-comment').onclick = (e) => {
+            e.preventDefault()
+            console.log(e.target.dataset.id)
+            all = document.querySelectorAll('.details-comment') 
+            name = all[0].value
+            email = all[1].value
+            comment = all[2].value
+            if( (name!=='') && (comment!=='') ){
+                 BuildComment(e.target.dataset.id,name,email,comment)
+            }else{
+                alert('please enter your name and a comment to reply')
+            }
+        }
+
+        function formatAMPM(date) {
+              var hours = date.getHours();
+              var minutes = date.getMinutes();
+              var ampm = hours >= 12 ? 'pm' : 'am';
+              hours = hours % 12;
+              hours = hours ? hours : 12; // the hour '0' should be '12'
+              minutes = minutes < 10 ? '0'+minutes : minutes;
+              var strTime = hours + ':' + minutes + ' ' + ampm;
+              return strTime;
+            }
+    </script>
+{% endblock %}
