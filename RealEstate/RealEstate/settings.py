@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['real-estate-app-name.herokuapp.com','127.0.0.1']
 
 
 # Application definition
-
+#web: waitress-serve --port=$PORT RealEstate.wsgi:application
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
