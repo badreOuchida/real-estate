@@ -652,6 +652,16 @@ a, a:hover{
         line-height: 80px;
         font-size: 20px
     }
+
+    #navbar .nav_container .nav_links a:hover{
+        transition:0.1s;
+        color:gray;
+    }
+
+    #navbar .nav_container .nav_links i:hover{
+        transition:0.1s;
+        color:gray;
+    }
     #navbar .nav_container .nav_links li::before{
         display: none
     }
@@ -714,6 +724,8 @@ a, a:hover{
     }
     .search_box .selects_container .prop{
         margin-right: 0;
+        width:100%;
+        margin:0.5rem;
     }
     #hero_section .content{
         margin-top: 500px
@@ -722,8 +734,17 @@ a, a:hover{
         margin-top: 500px
     }
 }
+
+
+
+@media(max-width: 767px){
+    .our-services{
+        margin-top:1.75rem;
+    }
+}
 /* Large devices (desktops, less than 1200px)
 @media (max-width: 1199.98px) { ... }
 */
 /* X-Large devices (large desktops, less than 1400px)
 @media (max-width: 1399.98px) { ... }
+
