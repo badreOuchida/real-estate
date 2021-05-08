@@ -148,6 +148,26 @@ def contact(request):
 	if request.method == 'GET':
 		return render(request,'contact.html')
 
+def PropertiesStatus(request,status):
+	try :
+		properties = Propreties.objects.filter(status=status)
+
+	except Propreties.DoesNotExist:
+		return HttpResponse('invalid query')
+
+	objec = Propreties.objects.filter(featured=True)
+	paginator = Paginator(properties,10)
+	page_number = request.GET.get('page')
+	page_obj = paginator.get_page(page_number)
+	is_paginated = (len(page_obj)==10)
+	for prop in page_obj : 
+		print(prop)
+	context = {
+	'object':objec[0],
+	'page_obj':page_obj,
+	'is_paginated':is_paginated
+	}
+	return render(request,'listing.html',context)
 
 
 

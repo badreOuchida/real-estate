@@ -50,16 +50,16 @@
                     <div class="row">
                         <div class="col-md-6">
                             <ul>
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Poperties</a></li>
-                                <li><a href="#">Blogs</a></li>
+                                <li><a href="{% url 'app:home' %}">Home</a></li>
+                                <li><a href="{% url 'app:properties' %}">Poperties</a></li>
+                                <li><a href="{% url 'app:blogs' %}">Blogs</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6 our-services">
                             <ul>
                                 <li><a href="#">Our services</a></li>
-                                <li><a href="#">for rent</a></li>
-                                <li><a href="#">for sell</a></li>
+                                <li><a href="{% url 'app:status' 'rent' %}">for rent</a></li>
+                                <li><a href="{% url 'app:status' 'sell' %}">for sell</a></li>
                             </ul>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
 
                         <div class="col-md-6 mb-5">
                             <ul>
-                                <li><a href="#">lastest properties</a></li>
+                                <li><a href="{% url 'app:properties' %}">lastest properties</a></li>
                                 <li><a href="#">privacy</a></li>
                             </ul>
                         </div>

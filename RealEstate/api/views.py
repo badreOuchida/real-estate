@@ -4,6 +4,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter,OrderingFilter
 from django.contrib.auth import authenticate
 
 
@@ -36,8 +37,8 @@ class PropertiesAPI(ListAPIView):
     pagination_class = PageNumberPagination
     authentication_classes = ()
     permission_classes = ()
-    #filter_backends = (SearchFilter, OrderingFilter)
-    #search_fields = ('title', 'body', 'author__username')
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('^location', '^prop_type', '^air','^status','^price')
 
 
 
@@ -48,6 +49,7 @@ class BlogsAPI(ListAPIView):
     pagination_class = PageNumberPagination
     authentication_classes = ()
     permission_classes = ()
+    filter_backends = (SearchFilter, OrderingFilter)
 
 
 

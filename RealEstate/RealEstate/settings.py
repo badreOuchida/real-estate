@@ -86,11 +86,16 @@ WSGI_APPLICATION = 'RealEstate.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
+#postgres://euysarfuhxxydq:0f9057f356c73c7c5901a5ab7e868546791bca84af92677a5fed6c848fd4b577@ec2-34-193-113-223.compute-1.amazonaws.com:5432/d60rquiiauqvv3
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd60rquiiauqvv3',
+        'HOST': "ec2-34-193-113-223.compute-1.amazonaws.com",
+        'PORT':5432,
+        'USER':'euysarfuhxxydq',
+        'PASSWORD':'0f9057f356c73c7c5901a5ab7e868546791bca84af92677a5fed6c848fd4b577'
+
     }
 }
 

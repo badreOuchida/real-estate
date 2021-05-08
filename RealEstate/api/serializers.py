@@ -11,4 +11,4 @@ class PropSerializer(serializers.ModelSerializer):
 class BlogSerializes(serializers.ModelSerializer):
 	class Meta:
 		model = Blogs 
-		fields = ['title','mini_des','description']
+		fields = '__all__'
