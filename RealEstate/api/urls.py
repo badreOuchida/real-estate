@@ -7,8 +7,12 @@ app_name = 'api'
 urlpatterns = [
 	path('properties/',views.PropertiesAPI.as_view(), name='properties'),
 	path('properties/<int:pk>/',views.PropertieAPI,name='propertie'),
+
 	path('blogs/',views.BlogsAPI.as_view(),name="blogs"),
 	path('blog/<int:pk>/',views.BlogAPI,name="blog"),
+
+	path('comment/<int:pk>/',views.CommentAPI,name="comment"),
+	
 	path('blog/update/<int:pk>',views.BlogUpdatAPI,name="blog-update"),
 	path('blog/add',views.BlogAddAPI,name="blog-add"),
 	path('propertie/update/<int:pk>',views.PropertieUpdatAPI,name="propertie-update"),

@@ -1,4 +1,4 @@
-from .serializers import PropSerializer , BlogSerializes
+from .serializers import PropSerializer , BlogSerializes,CommentSerializes
 from rest_framework.decorators import api_view ,permission_classes,authentication_classes
 from rest_framework.generics import ListAPIView
 from rest_framework import status
@@ -18,7 +18,7 @@ from rest_framework.authtoken.models import Token
 
 
 
-from core.models import Propreties , Blogs
+from core.models import Propreties , Blogs , Comment
 
 import datetime 
     
@@ -77,6 +77,19 @@ def BlogAPI(request,pk):
 
     if request.method == 'GET':
         serializer = BlogSerializes(blog)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([])
+def CommentAPI(request,pk):
+    try:
+        comment = Comment.objects.get(pk=pk)
+    except Comment.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = CommentSerializes(comment)
         return Response(serializer.data)
 
 
