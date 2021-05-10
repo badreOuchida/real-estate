@@ -186,6 +186,38 @@ def BlogAddAPI(request):
 
     return Response({'response':'You got somethings wrong'})
 
+
+
+
+@api_view(['POST'])
+@permission_classes([])
+def CommentAddAPI(request,pk):
+    if request.data == {}:
+        return Response({'response':'You got somethings wrong'})
+
+    if request.method == 'POST':
+        serializer = CommentSerializes(data=request.data)
+        if serializer.is_valid():
+            comment = serializer.save()
+            if request.data['status'] == 'propertie' : 
+                obj = Propreties.objects.get(pk=pk)
+            elif request.data['status'] == 'blog' :
+                obj = Blogs.objects.get(pk=pk)
+            else : 
+                return JsonResponse({'error':'invalid data'},status=400)
+
+
+            obj.comment.add(comment)
+            obj.save()
+
+            return Response({
+                'response':'data was succsefuly created',
+                'id':comment.id,
+                'data-updated': datetime.datetime.now() 
+                })
+
+    return Response({'response':'You got somethings wrong'})
+
 # delete items
 
 @api_view(['DELETE'])
