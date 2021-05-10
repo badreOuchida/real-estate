@@ -98,7 +98,7 @@
                             <div class="blog_content">
                                 <h5 class="blog_title"><a href="#">Ut cursus tristique proin libero quam.</a></h5>
                                 <p class="blog_desciption">{{blog.mini_des}}</p>
-                                <a href="#" class="read_more" style="color:#F17A39;">Read more...</a>
+                                <a href="{% url 'app:blog_detail' blog.id %}" class="read_more" style="color:#F17A39;">Read more...</a>
                                 <span class="autor">by joe roman</span>
                             </div>
                         </div>
