@@ -1,4 +1,4 @@
-from .serializers import PropSerializer , BlogSerializes,CommentSerializes
+from .serializers import PropSerializer , BlogSerializes,CommentSerializes ,ImageSerializer
 from rest_framework.decorators import api_view ,permission_classes,authentication_classes
 from rest_framework.generics import ListAPIView
 from rest_framework import status
@@ -18,7 +18,7 @@ from rest_framework.authtoken.models import Token
 
 
 
-from core.models import Propreties , Blogs , Comment
+from core.models import Propreties , Blogs , Comment , ListImages
 
 import datetime 
     
@@ -51,6 +51,20 @@ class BlogsAPI(ListAPIView):
     permission_classes = ()
     filter_backends = (SearchFilter, OrderingFilter)
 
+
+
+
+@api_view(['GET'])
+@permission_classes([])
+def ImageAPI(request,pk):
+    try:
+        image = ListImages.objects.get(pk=pk)
+    except ListImages.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ImageSerializer(image)
+        return Response(serializer.data)
 
 
 

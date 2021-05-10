@@ -13,6 +13,9 @@ urlpatterns = [
 
 	path('comment/<int:pk>/',views.CommentAPI,name="comment"),
 
+	path('image/<int:pk>/',views.ImageAPI,name="image"),
+
+
 	path('comment/add/<int:pk>/',views.CommentAddAPI,name="comment-add"),
 	
 	path('blog/update/<int:pk>',views.BlogUpdatAPI,name="blog-update"),
