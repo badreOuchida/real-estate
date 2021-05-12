@@ -6,6 +6,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter,OrderingFilter
 from django.contrib.auth import authenticate
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 from rest_framework.permissions import IsAuthenticated
@@ -19,6 +20,7 @@ from rest_framework.authtoken.models import Token
 
 
 from core.models import Propreties , Blogs , Comment , ListImages
+from core.filters import PropertieFilter
 
 import datetime 
     
@@ -37,8 +39,9 @@ class PropertiesAPI(ListAPIView):
     pagination_class = PageNumberPagination
     authentication_classes = ()
     permission_classes = ()
-    filter_backends = (SearchFilter, OrderingFilter)
+    filter_backends = (SearchFilter, OrderingFilter,DjangoFilterBackend)
     search_fields = ('^location', '^prop_type', '^air','^status','^price')
+    filterset_class = PropertieFilter
 
 
 
