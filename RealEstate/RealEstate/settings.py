@@ -175,6 +175,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://sub.example.com",
     "http://localhost:3000",
     "http://127.0.0.1:9000",
-    "https://react-real-estate-app-name.herokuapp.com"
-
+    "https://react-real-estate-app-name.herokuapp.com",
+    "https://real-estate-react-hello.herokuapp.com"
 ]
